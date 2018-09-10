@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorage } from 'ngx-store';
 
+import { UserService } from '@app/service/user.service';
 import { TmdbService } from '@app/service/tmdb.service';
 import { Movie } from '@app/model/movie';
 import { ImageConf } from '@app/model/imageconf';
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private tmdbService: TmdbService,
+    private userService: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -41,6 +43,12 @@ export class HomeComponent implements OnInit {
       this.movies = resp.results;
     });
   }
+
+  buy (event: Event, movie: Movie) {
+    event.stopPropagation();
+    this.userService.buyMovie(movie);
+  }
+
 
   openMovie (e, movie) {
     this.router.navigate(['/' + movie.id + '-' + movie.original_title.replace(new RegExp(' ', 'g'), '-')]);

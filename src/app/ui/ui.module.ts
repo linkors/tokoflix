@@ -25,7 +25,8 @@ import { DetailComponent } from './detail/detail.component';
     HeaderComponent, 
     FooterComponent, 
     HomeComponent, 
-    PriceonratePipe, DetailComponent],
+    DetailComponent,
+    PriceonratePipe],
   exports: [LayoutComponent]
 })
 export class UiModule { }

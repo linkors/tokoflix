@@ -1,4 +1,5 @@
 import { ProductionCompany } from './productioncompany';
+import { VideoResponse } from './videoresponse';
 
 export class Movie {
 
@@ -22,6 +23,7 @@ export class Movie {
         public status: string,
         public release_date: string,
         public production_countries: string,
-        public production_companies: ProductionCompany[]
+        public production_companies: ProductionCompany[],
+        public videos: VideoResponse
     ) {}
 }

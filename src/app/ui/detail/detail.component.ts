@@ -2,9 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorage } from 'ngx-store';
 
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
+import { UserService } from '@app/service/user.service';
 import { TmdbService } from '@app/service/tmdb.service';
 import { Movie } from '@app/model/movie';
 import { ImageConf } from '@app/model/imageconf';
+import { YoutubeplayerComponent } from '@app/shared/modal/youtubeplayer/youtubeplayer.component';
 
 @Component({
   selector: 'app-detail',
@@ -21,14 +26,17 @@ export class DetailComponent implements OnInit {
   similarMovies: Movie[];
   recommendedMovies: Movie[];
 
+  bsModalRef: BsModalRef;
+
   constructor(
     private tmdbService: TmdbService,
+    private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit() {
-    this.initData();
     const param = this.route.snapshot.paramMap.get('id');
     this.movieId = +param.split('-')[0];
     this.initData();
@@ -61,9 +69,22 @@ export class DetailComponent implements OnInit {
     });
   }
 
+  buy (movie: Movie) {
+    this.userService.buyMovie(movie);
+  }
+
   openMovie (e, movie) {
     this.router.navigate(['/' + movie.id + '-' + movie.original_title.replace(new RegExp(' ', 'g'), '-')]);
     this.movieId = movie.id;
     this.initData();
   }
+
+  openTrailer(video) {
+    const initialState = {
+      key: video.key,
+    };
+    this.bsModalRef = this.modalService.show(YoutubeplayerComponent, {class:'modal-lg tf-youtube-modal', initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
 }
+

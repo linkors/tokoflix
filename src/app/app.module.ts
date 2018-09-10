@@ -3,19 +3,29 @@ import { NgModule } from '@angular/core';
 import { UiModule } from './ui/ui.module';
 import { HttpClientModule }    from '@angular/common/http';
 import { WebStorageModule } from 'ngx-store';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppComponent } from './app.component';
+import { YoutubeplayerComponent } from '@app/shared/modal/youtubeplayer/youtubeplayer.component';
+import { SafePipe } from './shared/pipe/safe.pipe';
+import { PriceonratePipe } from './shared/pipe/priceonrate.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    YoutubeplayerComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
     UiModule,
     HttpClientModule,
-    WebStorageModule
+    WebStorageModule,
+    ModalModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    PriceonratePipe
+  ],
+  entryComponents: [YoutubeplayerComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

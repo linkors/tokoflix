@@ -26,8 +26,8 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> -->
     <span class="navbar-text">
-        <div>User 1</div>
-        <div class="tf-wallet">Rp. 100.000</div>
+        <div>{{user.username}}</div>
+        <div class="tf-wallet">Rp. {{user.money | number:'2.'}}</div>
     </span>
   </div>
 </nav>

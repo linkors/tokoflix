@@ -10,8 +10,15 @@
         </div>
       </div>
       <div class="card-footer">
-          <div class="text-muted">{{movie.vote_average | priceonrate}}</div>
-          <div><a href="#" class="btn btn-success">Buy</a></div>
+          <div class="text-muted">Rp. {{movie?.vote_average | priceonrate | number:'2.'}}</div>
+          <div>
+              <button class="btn btn-success" type="button" (click)="buy($event, movie)" *ngIf="!userService.isOwnMovie(movie.id)">
+                      Buy
+              </button>
+              <button class="btn btn-success disabled" type="button" *ngIf="userService.isOwnMovie(movie.id)">
+                  Owned
+              </button>
+          </div>
       </div>
   </div>
 </div>

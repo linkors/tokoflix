@@ -25,7 +25,18 @@
             <div class="tf-overview">{{movie?.overview}}</div>
             <div class="tf-small-text"><i>runtime: {{movie?.runtime}} min</i></div>
             <div class="tf-action-container">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buy for {{movie?.vote_average | priceonrate}}</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="buy(movie)" *ngIf="!userService.isOwnMovie(movie.id)">
+                    Buy for Rp. {{movie?.vote_average | priceonrate | number:'2.'}}
+                </button>
+                <button class="btn btn-success my-2 my-sm-0 disabled" type="button" *ngIf="userService.isOwnMovie(movie.id)">
+                    Owned
+                </button>
+                <button class="btn btn-outline-danger mx-2 my-sm-0" 
+                (click)="openTrailer(movie?.videos?.results[0])"
+                *ngIf="movie?.videos?.results[0] && movie?.videos?.results[0].site === 'YouTube'" 
+                type="button">
+                    Trailer
+                </button>
             </div>
         </div>
     </div>
@@ -39,8 +50,15 @@
                 <h6 class="card-title">{{movie?.original_title}}</h6>
             </div>
             <div class="card-footer">
-                <div class="text-muted">{{movie?.vote_average | priceonrate}}</div>
-                <div><a href="#" class="btn btn-success">Buy</a></div>
+                <div class="text-muted">Rp. {{movie?.vote_average | priceonrate | number:'2.'}}</div>
+                <div>
+                    <button class="btn btn-success" type="button" (click)="buy(movie)" *ngIf="!userService.isOwnMovie(movie.id)">
+                            Buy
+                    </button>
+                    <button class="btn btn-success disabled" type="button" *ngIf="userService.isOwnMovie(movie.id)">
+                        Owned
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -54,8 +72,15 @@
                     <h6 class="card-title">{{movie?.original_title}}</h6>
                 </div>
                 <div class="card-footer">
-                    <div class="text-muted">{{movie?.vote_average | priceonrate}}</div>
-                    <div><a href="#" class="btn btn-success">Buy</a></div>
+                    <div class="text-muted">Rp. {{movie?.vote_average | priceonrate | number:'2.'}}</div>
+                    <div>
+                        <button class="btn btn-success" type="button" (click)="buy(movie)" *ngIf="!userService.isOwnMovie(movie.id)">
+                                Buy
+                        </button>
+                        <button class="btn btn-success disabled" type="button" *ngIf="userService.isOwnMovie(movie.id)">
+                            Owned
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
