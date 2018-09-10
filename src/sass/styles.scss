@@ -68,13 +68,13 @@ app-layout {
   
   .card {
     @include respond-to('small') {
-      width: 45%;
+      width: 23%;
     }
     @include respond-to('medium') {
-      width: 17%;
+      width: 23%;
     }
-    @include respond-to('xlarge') {
-      width: 10%;
+    @include respond-to('large') {
+      width: 16%;
     }
     width: 45%;
     margin-bottom: 1rem;
