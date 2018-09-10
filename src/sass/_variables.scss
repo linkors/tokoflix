@@ -1,3 +1,8 @@
 $background-color: #1c6020;
 $green: #42b549;
-$mobile-portrait: '(max-width: 768px)';
+$breakpoints: (
+  'small':  767px,
+  'medium': 992px,
+  'large':  1200px,
+  'xlarge':  1440px,
+) !default;

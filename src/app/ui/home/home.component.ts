@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private tmdbService: TmdbService,
-    private userService: UserService,
+    public userService: UserService,
     private alertService: AlertService,
     private route: ActivatedRoute,
     private router: Router

@@ -25,7 +25,9 @@ export class UserService {
   }
 
   watchStorage(): Observable<NgxStorageEvent>{
-    return  this.localStorageService.observe();
+    return  this.localStorageService.observe().pipe(
+     filter(event => event.key === this.key) 
+    );
   }
 
   buyMovie (movie: Movie): Observable<BuyResponse> {

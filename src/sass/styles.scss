@@ -63,10 +63,20 @@ app-layout {
 .tf-movie-container {
   max-width: 100%;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-around; 
+  
   .card {
-    width: 250px;
+    @include respond-to('small') {
+      width: 45%;
+    }
+    @include respond-to('medium') {
+      width: 17%;
+    }
+    @include respond-to('xlarge') {
+      width: 10%;
+    }
+    width: 45%;
     margin-bottom: 1rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
@@ -84,6 +94,12 @@ app-layout {
 
     .card-footer {
       @extend %movie-card-footer;
+      
+      .text-muted {
+        @include respond-to('xlarge') {
+          font-size: 0.8em;
+        }
+      }
     }
   }
 }
@@ -93,6 +109,9 @@ app-layout {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 50vh;
+}
+.tf-detail-poster {
+  text-align: right;
 }
 .tf-movie-detail {
   padding: 1rem;
@@ -148,6 +167,12 @@ app-layout {
     }
     .card-footer {
       @extend %movie-card-footer;
+
+      .text-muted {
+        @include respond-to('xlarge') {
+          font-size: 0.8em;
+        }
+      }
     }
   }
 }
