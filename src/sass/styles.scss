@@ -1,0 +1,129 @@
+@import './variables';
+@import './mixins';
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+  background: $background-color;
+  min-height: 100%;
+}
+
+app-layout {
+  display: block;
+  min-height: 100%;
+  position: relative;
+}
+
+.navbar-text {
+  margin-left: 1rem;
+  .tf-wallet {
+    font-size: 0.7rem;
+    color: white !important;
+  }
+}
+.tf-pagination-container {
+  height: 90px;
+  .pagination {
+    -ms-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+    padding: 0;
+
+    .page-item.active {
+      .page-link {
+        background-color: $green !important;
+        color: white !important;
+        border-color: $green !important;
+      }
+    }
+    .page-link {
+      color: $green !important;
+    }
+  }
+}
+
+.tf-movie-container {
+  max-width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  .card {
+    width: 250px;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+
+    .card-body {
+      padding: 0;
+
+      h5 {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding: 1rem;
+      }
+    }
+
+    .card-footer {
+      padding: 0;
+      
+      & > div {
+        width: 50%;
+        display: inline-block;
+      }
+
+      & .text-muted {
+        padding-left: 0.5rem;
+      }
+
+      & .btn {
+        width: 100%;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+}
+
+
+/*BEGIN DETAIL PAGE*/
+.tf-movie-detail-container {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 50vh;
+}
+.tf-rating-container {
+	position: relative;
+  width: 5rem;
+  height: 1rem;
+  display: inline-block;
+  line-height: 1rem;
+}
+.tf-rating-container > div {
+	position: absolute;
+    left:0;
+}
+.tf-rating-on > span {
+  color: orange;
+}
+.tf-rating-on {
+	width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+/*END DETAIL PAGE*/
+.tf-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem;
+  color: white;
+  background-color: #343a40;
+}

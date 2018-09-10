@@ -1,0 +1,25 @@
+<h1>Now Playing</h1>
+
+<div class="tf-movie-container">
+  <div class="card" *ngFor="let movie of movies; index as i" [attr.data-index]="i" (click)="openMovie($event, movie)">
+      <img class="card-img-top" src="{{config.base_url}}w185{{movie.poster_path}}"/>
+      <div class="card-body">
+          <h5 class="card-title">{{movie.original_title}}</h5>
+          <!-- <p class="card-text">{{movie.overview}}</p> -->
+          <div>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+          <div class="text-muted">{{movie.vote_average | priceonrate}}</div>
+          <div><a href="#" class="btn btn-success">Buy</a></div>
+      </div>
+  </div>
+</div>
+
+<div class="tf-pagination-container">
+  <pagination [maxSize]="10" [boundaryLinks]="true" [totalItems]="pagination.totalItem" [itemsPerPage]="20" [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"
+  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+
+  </pagination>
+</div>

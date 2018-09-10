@@ -1,0 +1,27 @@
+<div class="tf-movie-detail-container" [style.backgroundImage]="'url(' + config.base_url + 'original' + movie.backdrop_path + ')'">
+    <img class="" src="{{config.base_url}}w185{{movie.poster_path}}"/>
+    <div>{{movie.original_title}}</div>
+    <div>{{movie.overview}}</div>
+    <div>{{movie.runtime}}</div>
+    <div>{{movie.vote_average | priceonrate}}</div>
+    <div>Owned</div>
+    <div>
+    <div class="tf-rating-container">
+        <div class="tf-rating-off">
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            </div>
+        <div class="tf-rating-on" [style.width]="movie.vote_average * 10 + '%'">
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+        </div>
+      </div>
+      {{movie.vote_average}}
+    </div>
+</div>
