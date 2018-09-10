@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 
 import { User } from '@app/model/user';
 import { Movie } from '@app/model/movie';
+import { BuyResponse } from '@app/model/buyresponse';
 
 @Injectable({
   providedIn: 'root'
@@ -27,12 +28,17 @@ export class UserService {
     return  this.localStorageService.observe();
   }
 
-  buyMovie (movie: Movie) {
+  buyMovie (movie: Movie): Observable<BuyResponse> {
     const user = this.getUser ();
     const price =  this.priceonratePipe.transform(movie.vote_average);
-    user.money = user.money - price;
-    user.owned_video.push(movie.id);
-    this.localStorageService.set(this.key, user);
+    if (user.money - price >= 0) {
+      user.money = user.money - price;
+      user.owned_video.push(movie.id);
+      this.localStorageService.set(this.key, user);
+      return of({status: 'ok', message: 'Success buy!'});
+    } else {
+      return of({status: 'error', message: "Sorry, You don't have enough money!"})
+    }
   }
 
   isOwnMovie (movieId: number) {

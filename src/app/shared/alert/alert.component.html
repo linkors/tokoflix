@@ -1,0 +1,6 @@
+<alert *ngIf="isOpen && alert !== null"
+ [type]="alert.type" [dismissible]="true" 
+ [dismissOnTimeout]="alert.timeout"
+ (onClosed)="isOpen = false">
+ <span [innerHtml]="alert.message"></span>
+</alert>

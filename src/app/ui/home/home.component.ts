@@ -4,6 +4,7 @@ import { LocalStorage } from 'ngx-store';
 
 import { UserService } from '@app/service/user.service';
 import { TmdbService } from '@app/service/tmdb.service';
+import { AlertService } from '@app/service/alert.service';
 import { Movie } from '@app/model/movie';
 import { ImageConf } from '@app/model/imageconf';
 
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private tmdbService: TmdbService,
     private userService: UserService,
+    private alertService: AlertService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -46,7 +48,13 @@ export class HomeComponent implements OnInit {
 
   buy (event: Event, movie: Movie) {
     event.stopPropagation();
-    this.userService.buyMovie(movie);
+    this.userService.buyMovie(movie).subscribe((data) => {
+      if (data.status === 'ok') {
+        this.alertService.success(data.message);
+      } else {
+        this.alertService.error(data.message);
+      }
+  });
   }
 
 

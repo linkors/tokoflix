@@ -33,6 +33,10 @@ app-layout {
 .tf-small-text {
   font-size: 0.8rem;
 }
+.tf-movie-container .card, .tf-side-movie-container .card {
+  cursor: pointer;
+}
+/* BEGIN HOME PAGE */
 .tf-pagination-container {
   height: 90px;
   .pagination {
@@ -83,9 +87,8 @@ app-layout {
     }
   }
 }
-
-
-/*BEGIN DETAIL PAGE*/
+/* END HOME PAGE */
+/* BEGIN DETAIL PAGE */
 .tf-movie-detail-container {
   background-size: cover;
   background-repeat: no-repeat;
@@ -151,8 +154,8 @@ app-layout {
 .tf-sub-title {
   margin-top: 1.2rem;
 }
-/*END DETAIL PAGE*/
-
+/* END DETAIL PAGE */
+/* BEGIN FOOTER */
 .tf-filler {
   height: 50px;
 }
@@ -165,3 +168,4 @@ app-layout {
   color: white;
   background-color: #343a40;
 }
+/* END FOOTER */

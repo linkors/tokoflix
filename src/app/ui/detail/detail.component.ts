@@ -7,6 +7,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 import { UserService } from '@app/service/user.service';
 import { TmdbService } from '@app/service/tmdb.service';
+import { AlertService } from '@app/service/alert.service';
 import { Movie } from '@app/model/movie';
 import { ImageConf } from '@app/model/imageconf';
 import { YoutubeplayerComponent } from '@app/shared/modal/youtubeplayer/youtubeplayer.component';
@@ -31,6 +32,7 @@ export class DetailComponent implements OnInit {
   constructor(
     private tmdbService: TmdbService,
     private userService: UserService,
+    private alertService: AlertService,
     private route: ActivatedRoute,
     private router: Router,
     private modalService: BsModalService
@@ -69,8 +71,15 @@ export class DetailComponent implements OnInit {
     });
   }
 
-  buy (movie: Movie) {
-    this.userService.buyMovie(movie);
+  buy (event: Event, movie: Movie) {
+    event.stopPropagation();
+    this.userService.buyMovie(movie).subscribe((data) => {
+        if (data.status === 'ok') {
+          this.alertService.success(data.message);
+        } else {
+          this.alertService.error(data.message);
+        }
+    });
   }
 
   openMovie (e, movie) {
