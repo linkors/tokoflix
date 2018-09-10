@@ -36,7 +36,7 @@ export class TmdbService {
   }
 
   getNowPlaying (page: number): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + `/movie/now_playing?api_key=${this.apiKey}&language=id&page=${page}`)
+    return this.http.get<Response>(this.baseUrl + `/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=${page}`)
     .pipe(
       tap(response => console.log(`Get now playing movie`)),
       catchError(this.handleError<Response>('getNowPlaying'))
@@ -44,7 +44,7 @@ export class TmdbService {
   }
 
   getRecommendation (movieId:number, page:number): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + `/movie/${movieId}/recommendations?api_key=${this.apiKey}&language=id&page=${page}`)
+    return this.http.get<Response>(this.baseUrl + `/movie/${movieId}/recommendations?api_key=${this.apiKey}&language=en-US&page=${page}`)
     .pipe(
       tap(response => console.log(`Get movie recommendation`)),
       catchError(this.handleError<Response>('getRecommendation'))
@@ -52,7 +52,7 @@ export class TmdbService {
   }
 
   getSimilarMovie (movieId:number, page:number): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + `/movie/${movieId}/similar?api_key=${this.apiKey}&language=id&page=${page}`)
+    return this.http.get<Response>(this.baseUrl + `/movie/${movieId}/similar?api_key=${this.apiKey}&language=en-US&page=${page}`)
     .pipe(
       tap(response => console.log(`Get similar movie`)),
       catchError(this.handleError<Response>('getSimilarMovie'))
@@ -60,7 +60,7 @@ export class TmdbService {
   }
 
   getMovieDetail (movieId:number): Observable<Movie> {
-    return this.http.get<Movie>(this.baseUrl + `/movie/${movieId}?api_key=${this.apiKey}&language=id&append_to_response=videos`)
+    return this.http.get<Movie>(this.baseUrl + `/movie/${movieId}?api_key=${this.apiKey}&language=en-US&append_to_response=videos`)
     .pipe(
       tap(response => console.log(`Get now playing movie`)),
       catchError(this.handleError<Movie>('getNowPlaying'))

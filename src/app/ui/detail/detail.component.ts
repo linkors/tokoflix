@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorage } from 'ngx-store';
 
 import { TmdbService } from '@app/service/tmdb.service';
@@ -23,14 +22,19 @@ export class DetailComponent implements OnInit {
   recommendedMovies: Movie[];
 
   constructor(
+    private tmdbService: TmdbService,
     private route: ActivatedRoute,
-    private tmdbService: TmdbService
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.initData();
     const param = this.route.snapshot.paramMap.get('id');
     this.movieId = +param.split('-')[0];
+    this.initData();
+  }
 
+  initData() {
     this.getMovieDetail();
     this.getSimilarMovie();
     this.getRecommendation();
@@ -55,5 +59,11 @@ export class DetailComponent implements OnInit {
     .subscribe(resp => {
       this.recommendedMovies = resp.results;
     });
+  }
+
+  openMovie (e, movie) {
+    this.router.navigate(['/' + movie.id + '-' + movie.original_title.replace(new RegExp(' ', 'g'), '-')]);
+    this.movieId = movie.id;
+    this.initData();
   }
 }

@@ -1,6 +1,25 @@
 %size-100 {
     height: 100%;
 }
+%movie-card-footer {
+    padding: 0;
+      
+    & > div {
+      width: 50%;
+      display: inline-block;
+    }
+
+    & .text-muted {
+      padding-left: 0.5rem;
+    }
+
+    & .btn {
+      width: 100%;
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+}
 @mixin respond-to ($media) {
     @media #{$media} { 
         @content; 

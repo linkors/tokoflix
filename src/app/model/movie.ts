@@ -1,3 +1,5 @@
+import { ProductionCompany } from './productioncompany';
+
 export class Movie {
 
     constructor (
@@ -19,6 +21,7 @@ export class Movie {
         public runtime: number,
         public status: string,
         public release_date: string,
-        public production_countries: string
+        public production_countries: string,
+        public production_companies: ProductionCompany[]
     ) {}
 }

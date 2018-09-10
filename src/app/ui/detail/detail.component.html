@@ -1,27 +1,62 @@
-<div class="tf-movie-detail-container" [style.backgroundImage]="'url(' + config.base_url + 'original' + movie.backdrop_path + ')'">
-    <img class="" src="{{config.base_url}}w185{{movie.poster_path}}"/>
-    <div>{{movie.original_title}}</div>
-    <div>{{movie.overview}}</div>
-    <div>{{movie.runtime}}</div>
-    <div>{{movie.vote_average | priceonrate}}</div>
-    <div>Owned</div>
-    <div>
-    <div class="tf-rating-container">
-        <div class="tf-rating-off">
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-            </div>
-        <div class="tf-rating-on" [style.width]="movie.vote_average * 10 + '%'">
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
+<div class="tf-movie-detail-container" [style.backgroundImage]="'url(' + config.base_url + 'original' + movie?.backdrop_path + ')'">
+    <div class="tf-movie-detail row col-lg-5">
+        <div class="col-xl-4 col-lg-12">
+            <img class="" src="{{config.base_url}}w185{{movie?.poster_path}}"/>
         </div>
-      </div>
-      {{movie.vote_average}}
+        <div class="col-xl-8 col-lg-12">
+            <h2>{{movie?.original_title}}</h2>
+            <div class="tf-rating-container">
+                    <div class="tf-rating-off">
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        </div>
+                    <div class="tf-rating-on" [style.width]="movie?.vote_average * 10 + '%'">
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    </div>
+                </div>
+                {{movie?.release_date | date:'yyyy'}}
+            <div class="tf-overview">{{movie?.overview}}</div>
+            <div class="tf-small-text"><i>runtime: {{movie?.runtime}} min</i></div>
+            <div class="tf-action-container">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buy for {{movie?.vote_average | priceonrate}}</button>
+            </div>
+        </div>
     </div>
 </div>
+<h1 class="tf-sub-title">Similar Movies</h1>
+<div class="tf-side-view">
+    <div class="tf-side-movie-container">
+        <div class="card" *ngFor="let movie of similarMovies; index as i" [attr.data-index]="i" (click)="openMovie($event, movie)">
+            <img class="card-img-top" src="{{config.base_url}}w185{{movie?.poster_path}}"/>
+            <div class="card-body">
+                <h6 class="card-title">{{movie?.original_title}}</h6>
+            </div>
+            <div class="card-footer">
+                <div class="text-muted">{{movie?.vote_average | priceonrate}}</div>
+                <div><a href="#" class="btn btn-success">Buy</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<h1 class="tf-sub-title">Recommended Movie</h1>
+<div class="tf-side-view">
+        <div class="tf-side-movie-container">
+            <div class="card" *ngFor="let movie of recommendedMovies; index as i" [attr.data-index]="i" (click)="openMovie($event, movie)">
+                <img class="card-img-top" src="{{config.base_url}}w185{{movie?.poster_path}}"/>
+                <div class="card-body">
+                    <h6 class="card-title">{{movie?.original_title}}</h6>
+                </div>
+                <div class="card-footer">
+                    <div class="text-muted">{{movie?.vote_average | priceonrate}}</div>
+                    <div><a href="#" class="btn btn-success">Buy</a></div>
+                </div>
+            </div>
+        </div>
+    </div>

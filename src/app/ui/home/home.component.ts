@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorage } from 'ngx-store';
 
 import { TmdbService } from '@app/service/tmdb.service';
-
 import { Movie } from '@app/model/movie';
 import { ImageConf } from '@app/model/imageconf';
 
