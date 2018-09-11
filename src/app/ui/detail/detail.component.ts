@@ -10,7 +10,7 @@ import { TmdbService } from '@app/service/tmdb.service';
 import { AlertService } from '@app/service/alert.service';
 import { Movie } from '@app/model/movie';
 import { ImageConf } from '@app/model/imageconf';
-import { YoutubeplayerComponent } from '@app/shared/modal/youtubeplayer/youtubeplayer.component';
+import { YoutubeplayerComponent } from '@app/ui/shared/modal/youtubeplayer/youtubeplayer.component';
 
 @Component({
   selector: 'app-detail',

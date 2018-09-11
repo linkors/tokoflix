@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit {
   pagination: any;
   movies: Movie[];
 
-  @LocalStorage('imageConfig') config: ImageConf;
+  @LocalStorage('imageConfig')
+  config: ImageConf;
 
   constructor(
     private tmdbService: TmdbService,
@@ -25,47 +26,42 @@ export class HomeComponent implements OnInit {
     private alertService: AlertService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-
-   }
+  ) {}
 
   ngOnInit() {
     this.pagination = {};
     this.pagination.totalItem = 99;
     this.route.queryParams.subscribe(params => {
-        this.pagination.currentPage = +params['page'] || 1;
+      this.pagination.currentPage = +params['page'] || 1;
     });
     this.getMovie(this.pagination.currentPage);
   }
 
-  getMovie (page) {
-    this.tmdbService.getNowPlaying(page)
-    .subscribe(resp => {
+  getMovie(page) {
+    this.tmdbService.getNowPlaying(page).subscribe(resp => {
       this.pagination.totalItem = resp.total_results;
       this.movies = resp.results;
     });
   }
 
-  buy (event: Event, movie: Movie) {
+  buy(event: Event, movie: Movie) {
     event.stopPropagation();
-    this.userService.buyMovie(movie).subscribe((data) => {
+    this.userService.buyMovie(movie).subscribe(data => {
       if (data.status === 'ok') {
         this.alertService.success(data.message);
       } else {
         this.alertService.error(data.message);
       }
-  });
+    });
   }
 
-
-  openMovie (e, movie) {
+  openMovie(e, movie) {
     this.router.navigate(['/' + movie.id + '-' + movie.original_title.replace(new RegExp(' ', 'g'), '-')]);
   }
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.router.navigate(['.'], { relativeTo: this.route, queryParams: {page: this.pagination.currentPage} });
+    this.router.navigate(['.'], { relativeTo: this.route, queryParams: { page: this.pagination.currentPage } });
     this.getMovie(this.pagination.currentPage);
   }
-
 }

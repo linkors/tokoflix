@@ -138,7 +138,10 @@ app-layout {
   min-height: 50vh;
 }
 .tf-detail-poster {
-  text-align: right;
+  text-align: center;
+  @include respond-to('medium') {
+    text-align: right;
+  }
 }
 .tf-movie-detail {
   padding: 1rem;
@@ -146,6 +149,16 @@ app-layout {
   height: 100%;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0));
   color: white;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  @include respond-to('small') {
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+    margin-right: -15px !important;
+    margin-left: -15px !important;
+  }
 }
 .tf-overview {
   margin: 1rem 0;
