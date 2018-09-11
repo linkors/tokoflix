@@ -1,30 +1,30 @@
-<h1>Now Playing</h1>
+<h1 class="tf-title">Now Playing</h1>
 
 <div class="tf-movie-container">
-  <div class="card" *ngFor="let movie of movies; index as i" [attr.data-index]="i" (click)="openMovie($event, movie)">
-      <img class="card-img-top" src="{{config.base_url}}w185{{movie.poster_path}}"/>
-      <div class="card-body">
-          <h5 class="card-title">{{movie.original_title}}</h5>
-          <div>
-          
+    <div class="card" *ngFor="let movie of movies; index as i" [attr.data-index]="i" (click)="openMovie($event, movie)">
+        <img class="card-img-top" src="{{config.base_url}}w185{{movie.poster_path}}" />
+        <div class="card-body">
+            <div class="card-title">{{movie.original_title}}</div>
+            <div>
+
+            </div>
         </div>
-      </div>
-      <div class="card-footer">
-          <div class="text-muted">Rp. {{movie?.vote_average | priceonrate | number:'2.'}}</div>
-          <div>
-              <button class="btn btn-success" type="button" (click)="buy($event, movie)" *ngIf="!userService.isOwnMovie(movie.id)">
-                      Buy
-              </button>
-              <button class="btn btn-success disabled" type="button" *ngIf="userService.isOwnMovie(movie.id)">
-                  Owned
-              </button>
-          </div>
-      </div>
-  </div>
+        <div class="card-footer">
+            <div class="text-muted">Rp. {{movie?.vote_average | priceonrate | number:'2.'}}</div>
+            <div>
+                <button class="btn btn-success" type="button" (click)="buy($event, movie)" *ngIf="!userService.isOwnMovie(movie.id)">
+                    Buy
+                </button>
+                <button class="btn btn-success disabled" type="button" *ngIf="userService.isOwnMovie(movie.id)">
+                    Owned
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="tf-pagination-container">
-  <pagination [maxSize]="10" [boundaryLinks]="true" [totalItems]="pagination.totalItem" [itemsPerPage]="20" [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"
-  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+    <pagination [maxSize]="5" [boundaryLinks]="true" [totalItems]="pagination.totalItem" [itemsPerPage]="20" [(ngModel)]="pagination.currentPage"
+        (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
 
-  </pagination>
+    </pagination>
 </div>

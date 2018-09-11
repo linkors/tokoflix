@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '@app/service/user.service'
+import { UserService } from '@app/service/user.service';
 
 import { User } from '@app/model/user';
 
@@ -10,14 +10,14 @@ import { User } from '@app/model/user';
 })
 export class HeaderComponent implements OnInit {
   user: User;
+  isCollapsed = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.user = this.userService.getUser();
-    this.userService.watchStorage().subscribe((event) => {
+    this.userService.watchStorage().subscribe(event => {
       this.user = event.newValue;
     });
   }
-
 }

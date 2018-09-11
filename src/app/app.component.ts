@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorage } from 'ngx-store';
- 
+
 import { TmdbService } from '@app/service/tmdb.service';
 import { ImageConf } from '@app/model/imageconf';
 
@@ -10,11 +10,10 @@ import { ImageConf } from '@app/model/imageconf';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  @LocalStorage('imageConfig') config: ImageConf;
+  @LocalStorage('imageConfig')
+  config: ImageConf;
 
-  constructor(private tmdbService: TmdbService) {
-
-  }
+  constructor(private tmdbService: TmdbService) {}
 
   ngOnInit() {
     if (!this.config) {
@@ -22,9 +21,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-  getConfig () {
-    this.tmdbService.getConfiguration()
-    .subscribe(resp => {
+  getConfig() {
+    this.tmdbService.getConfiguration().subscribe(resp => {
       this.config = resp.images;
     });
   }

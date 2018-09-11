@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from '@app/app-routing/app-routing.module';
 
 import { LayoutComponent } from './shared/layout/layout.component';
@@ -14,19 +14,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { DetailComponent } from './detail/detail.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    AppRoutingModule,
-    PaginationModule.forRoot()
-  ],
-  declarations: [
-    LayoutComponent, 
-    HeaderComponent, 
-    FooterComponent, 
-    HomeComponent, 
-    DetailComponent,
-    PriceonratePipe],
+  imports: [CommonModule, FormsModule, AppRoutingModule, PaginationModule.forRoot()],
+  declarations: [LayoutComponent, HeaderComponent, FooterComponent, HomeComponent, DetailComponent, PriceonratePipe],
   exports: [LayoutComponent]
 })
-export class UiModule { }
+export class UiModule {}

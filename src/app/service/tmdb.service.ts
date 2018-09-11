@@ -15,15 +15,58 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TmdbService {
-
   private baseUrl = 'https://api.themoviedb.org/3';
-  private apiKey = 'e8053ddeaf8901bf3c21a7879f17b55f'; 
+  private apiKey = 'e8053ddeaf8901bf3c21a7879f17b55f';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  getNowPlaying(page: number): Observable<Response> {
+    return this.http
+      .get<Response>(this.baseUrl + `/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=${page}`)
+      .pipe(
+        tap(response => console.log(`Get now playing movie`)),
+        catchError(this.handleError<Response>('getNowPlaying'))
+      );
+  }
+
+  getRecommendation(movieId: number, page: number): Observable<Response> {
+    return this.http
+      .get<Response>(
+        this.baseUrl + `/movie/${movieId}/recommendations?api_key=${this.apiKey}&language=en-US&page=${page}`
+      )
+      .pipe(
+        tap(response => console.log(`Get movie recommendation`)),
+        catchError(this.handleError<Response>('getRecommendation'))
+      );
+  }
+
+  getSimilarMovie(movieId: number, page: number): Observable<Response> {
+    return this.http
+      .get<Response>(this.baseUrl + `/movie/${movieId}/similar?api_key=${this.apiKey}&language=en-US&page=${page}`)
+      .pipe(
+        tap(response => console.log(`Get similar movie`)),
+        catchError(this.handleError<Response>('getSimilarMovie'))
+      );
+  }
+
+  getMovieDetail(movieId: number): Observable<Movie> {
+    return this.http
+      .get<Movie>(this.baseUrl + `/movie/${movieId}?api_key=${this.apiKey}&language=en-US&append_to_response=videos`)
+      .pipe(
+        tap(response => console.log(`Get now playing movie`)),
+        catchError(this.handleError<Movie>('getNowPlaying'))
+      );
+  }
+
+  getConfiguration(): Observable<Configuration> {
+    return this.http.get<Configuration>(this.baseUrl + `/configuration?api_key=${this.apiKey}`).pipe(
+      tap(response => console.log(`Get configuration`)),
+      catchError(this.handleError<Configuration>('getConfiguration'))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
@@ -34,45 +77,4 @@ export class TmdbService {
       return of(result as T);
     };
   }
-
-  getNowPlaying (page: number): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + `/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=${page}`)
-    .pipe(
-      tap(response => console.log(`Get now playing movie`)),
-      catchError(this.handleError<Response>('getNowPlaying'))
-    );
-  }
-
-  getRecommendation (movieId:number, page:number): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + `/movie/${movieId}/recommendations?api_key=${this.apiKey}&language=en-US&page=${page}`)
-    .pipe(
-      tap(response => console.log(`Get movie recommendation`)),
-      catchError(this.handleError<Response>('getRecommendation'))
-    );
-  }
-
-  getSimilarMovie (movieId:number, page:number): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + `/movie/${movieId}/similar?api_key=${this.apiKey}&language=en-US&page=${page}`)
-    .pipe(
-      tap(response => console.log(`Get similar movie`)),
-      catchError(this.handleError<Response>('getSimilarMovie'))
-    );
-  }
-
-  getMovieDetail (movieId:number): Observable<Movie> {
-    return this.http.get<Movie>(this.baseUrl + `/movie/${movieId}?api_key=${this.apiKey}&language=en-US&append_to_response=videos`)
-    .pipe(
-      tap(response => console.log(`Get now playing movie`)),
-      catchError(this.handleError<Movie>('getNowPlaying'))
-    );
-  }
-
-  getConfiguration (): Observable<Configuration> {
-    return this.http.get<Configuration>(this.baseUrl + `/configuration?api_key=${this.apiKey}`)
-    .pipe(
-      tap(response => console.log(`Get configuration`)),
-      catchError(this.handleError<Configuration>('getConfiguration'))
-    );
-  }
-
 }

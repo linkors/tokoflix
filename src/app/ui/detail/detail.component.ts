@@ -18,8 +18,8 @@ import { YoutubeplayerComponent } from '@app/shared/modal/youtubeplayer/youtubep
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
-
-  @LocalStorage('imageConfig') config: ImageConf;
+  @LocalStorage('imageConfig')
+  config: ImageConf;
 
   movie: Movie;
   movieId: number;
@@ -36,7 +36,7 @@ export class DetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private modalService: BsModalService
-  ) { }
+  ) {}
 
   ngOnInit() {
     const param = this.route.snapshot.paramMap.get('id');
@@ -50,39 +50,36 @@ export class DetailComponent implements OnInit {
     this.getRecommendation();
   }
 
-  getMovieDetail () {
-    this.tmdbService.getMovieDetail(this.movieId)
-    .subscribe(resp => {
+  getMovieDetail() {
+    this.tmdbService.getMovieDetail(this.movieId).subscribe(resp => {
       this.movie = resp;
     });
   }
 
-  getSimilarMovie () {
-    this.tmdbService.getSimilarMovie(this.movieId, 1)
-    .subscribe(resp => {
+  getSimilarMovie() {
+    this.tmdbService.getSimilarMovie(this.movieId, 1).subscribe(resp => {
       this.similarMovies = resp.results;
     });
   }
 
-  getRecommendation () {
-    this.tmdbService.getRecommendation(this.movieId, 1)
-    .subscribe(resp => {
+  getRecommendation() {
+    this.tmdbService.getRecommendation(this.movieId, 1).subscribe(resp => {
       this.recommendedMovies = resp.results;
     });
   }
 
-  buy (event: Event, movie: Movie) {
+  buy(event: Event, movie: Movie) {
     event.stopPropagation();
-    this.userService.buyMovie(movie).subscribe((data) => {
-        if (data.status === 'ok') {
-          this.alertService.success(data.message);
-        } else {
-          this.alertService.error(data.message);
-        }
+    this.userService.buyMovie(movie).subscribe(data => {
+      if (data.status === 'ok') {
+        this.alertService.success(data.message);
+      } else {
+        this.alertService.error(data.message);
+      }
     });
   }
 
-  openMovie (e, movie) {
+  openMovie(e, movie) {
     this.router.navigate(['/' + movie.id + '-' + movie.original_title.replace(new RegExp(' ', 'g'), '-')]);
     this.movieId = movie.id;
     this.initData();
@@ -90,10 +87,12 @@ export class DetailComponent implements OnInit {
 
   openTrailer(video) {
     const initialState = {
-      key: video.key,
+      key: video.key
     };
-    this.bsModalRef = this.modalService.show(YoutubeplayerComponent, {class:'modal-lg tf-youtube-modal', initialState});
+    this.bsModalRef = this.modalService.show(YoutubeplayerComponent, {
+      class: 'modal-lg tf-youtube-modal',
+      initialState
+    });
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 }
-

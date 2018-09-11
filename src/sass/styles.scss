@@ -1,13 +1,16 @@
 @import './variables';
 @import './mixins';
 
-body, html {
-    width: 100%;
-    height: 100%;
+body,
+html {
+  width: 100%;
 }
 
 body {
   background: $background-color;
+  background-image: linear-gradient(rgba(255, 255, 255, 1) 80%, #343a40);
+  background-size: contain;
+  background-repeat: no-repeat;
   min-height: 100%;
 }
 
@@ -17,8 +20,12 @@ app-layout {
   position: relative;
 }
 
+.tf-navbar {
+  justify-content: flex-start !important;
+}
+
 .tf-youtube-modal {
-  text-align: center
+  text-align: center;
 }
 
 .navbar-text {
@@ -29,12 +36,29 @@ app-layout {
     font-size: 0.7rem;
     color: white !important;
   }
+  .tf-username {
+    color: $green;
+    font-size: 0.9rem;
+  }
 }
 .tf-small-text {
   font-size: 0.8rem;
 }
-.tf-movie-container .card, .tf-side-movie-container .card {
+.tf-movie-container .card,
+.tf-side-movie-container .card {
   cursor: pointer;
+}
+.navbar-brand {
+  color: $green !important;
+}
+
+.tf-title {
+  margin-left: 0.5rem;
+}
+.tf-navbar-userinfo {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
 }
 /* BEGIN HOME PAGE */
 .tf-pagination-container {
@@ -64,8 +88,8 @@ app-layout {
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around; 
-  
+  justify-content: space-around;
+
   .card {
     @include respond-to('small') {
       width: 23%;
@@ -84,19 +108,22 @@ app-layout {
     .card-body {
       padding: 0;
 
-      h5 {
+      .card-title {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-        padding: 1rem;
+        padding: 0.5rem;
+        @include respond-to('large') {
+          padding: 0.7rem;
+        }
       }
     }
 
     .card-footer {
       @extend %movie-card-footer;
-      
+
       .text-muted {
-        @include respond-to('xlarge') {
+        @include respond-to('large') {
           font-size: 0.8em;
         }
       }
@@ -117,30 +144,30 @@ app-layout {
   padding: 1rem;
   min-height: 50vh !important;
   height: 100%;
-  background-image: linear-gradient(to right, rgba(0,0,0,1) 20%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0));
   color: white;
 }
 .tf-overview {
   margin: 1rem 0;
 }
 .tf-rating-container {
-	position: relative;
+  position: relative;
   width: 5rem;
   height: 1rem;
   display: inline-block;
   line-height: 1rem;
 }
 .tf-rating-container > div {
-	position: absolute;
-    left:0;
+  position: absolute;
+  left: 0;
 }
 .tf-rating-on > span {
   color: orange;
 }
 .tf-rating-on {
-	width: 60%;
-    overflow: hidden;
-    white-space: nowrap;
+  width: 60%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .tf-action-container {
   margin-top: 1rem;
