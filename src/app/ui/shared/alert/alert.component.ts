@@ -10,6 +10,7 @@ import { AlertService } from '@app/service/alert.service';
   styleUrls: ['alert.component.scss']
 })
 export class AlertComponent implements OnInit, OnDestroy {
+  @Input()
   alert: Alert;
   subscription: Subscription;
   isOpen: boolean;

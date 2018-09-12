@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { YoutubeplayerComponent } from './youtubeplayer.component';
+import { PipeModule } from '@app/shared/pipe.module';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 describe('YoutubeplayerComponent', () => {
   let component: YoutubeplayerComponent;
@@ -8,7 +10,9 @@ describe('YoutubeplayerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [YoutubeplayerComponent]
+      declarations: [YoutubeplayerComponent],
+      imports: [PipeModule],
+      providers: [BsModalRef]
     }).compileComponents();
   }));
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-youtubeplayer',

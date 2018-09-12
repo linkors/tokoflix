@@ -12,7 +12,7 @@ import { DetailComponent } from './detail/detail.component';
 import { PipeModule } from '@app/shared/pipe.module';
 
 @NgModule({
-  imports: [CommonModule, PipeModule, FormsModule, AppRoutingModule, PaginationModule.forRoot()],
+  imports: [CommonModule, FormsModule, PipeModule, AppRoutingModule, PaginationModule.forRoot()],
   declarations: [LayoutComponent, HeaderComponent, FooterComponent, HomeComponent, DetailComponent],
   exports: [LayoutComponent]
 })
