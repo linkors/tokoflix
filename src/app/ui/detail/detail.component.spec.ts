@@ -10,8 +10,6 @@ import { RouterTestingModule } from 'node_modules/@angular/router/testing';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 describe('DetailComponent', () => {
-  let component: DetailComponent;
-  let fixture: ComponentFixture<DetailComponent>;
   const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
   beforeEach(() => {
